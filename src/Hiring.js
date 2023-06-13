@@ -14,7 +14,7 @@ const positions = [
   'Treasurer',
 ]; // Example dropdown options
 
-const FormComponent = () => {
+const HiringFormComponent = () => {
   const [formData, setFormData] = useState({
     userName: '',
     phoneNumber: '',

@@ -103,48 +103,55 @@ export default function Example() {
         <div className="flex flex-row flex-wrap items-center justify-center gap-y-6 gap-x-12 bg-white text-center md:justify-between">
           <img src="/images/logo.png" alt="logo-ct" className="w-10" />
           <ul className="flex flex-wrap items-center gap-y-2 gap-x-8">
-            <li>
-              <Typography
-                as="a"
-                href="#"
-                color="blue-gray"
-                className="font-normal transition-colors hover:text-blue-500 focus:text-blue-500"
-              >
-                Home
-              </Typography>
-            </li>
-            <li>
-              <Typography
-                as="a"
-                href="#"
-                color="blue-gray"
-                className="font-normal transition-colors hover:text-blue-500 focus:text-blue-500"
-              >
-                Games
-              </Typography>
-            </li>
-            <li>
-              <Link to="/hiring">
+            <Link to={'/'}>
+              <li>
                 <Typography
                   as="a"
                   href="#"
                   color="blue-gray"
                   className="font-normal transition-colors hover:text-blue-500 focus:text-blue-500"
                 >
+                  Home
+                </Typography>
+              </li>
+            </Link>
+            <Link to={'#'}>
+              <li>
+                <Typography
+                  // as="a"
+                  // href="#"
+                  color="blue-gray"
+                  className="font-normal transition-colors hover:text-blue-500 focus:text-blue-500"
+                >
+                  Games
+                </Typography>
+              </li>
+            </Link>
+
+            <Link to="/hiring">
+              <li>
+                <Typography
+                  // as="a"
+                  // href="#"
+                  color="blue-gray"
+                  className="font-normal transition-colors hover:text-blue-500 focus:text-blue-500"
+                >
                   Hiring
                 </Typography>
-              </Link>
-            </li>
-            <li>
-              <Typography
-                as="a"
-                href="#"
-                color="blue-gray"
-                className="font-normal transition-colors hover:text-blue-500 focus:text-blue-500"
-              >
-                Register Team
-              </Typography>
-            </li>
+              </li>
+            </Link>
+            <Link to={'/team-register'}>
+              <li>
+                <Typography
+                  // as="a"
+                  // href="#"
+                  color="blue-gray"
+                  className="font-normal transition-colors hover:text-blue-500 focus:text-blue-500"
+                >
+                  Register Team
+                </Typography>
+              </li>
+            </Link>
           </ul>
         </div>
         <hr className="my-8 border-blue-gray-50" />
