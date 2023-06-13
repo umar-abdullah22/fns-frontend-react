@@ -7,7 +7,7 @@ import { Typography } from "@material-tailwind/react";
 const navigation = [
     { name: 'Home', href: '#' },
     { name: 'Games', href: '#' },
-    { name: 'Hiring', href: '' },
+    { name: 'Hiring', href: '#Hiring' },
     { name: 'Register', href: '#' },
     ]
 

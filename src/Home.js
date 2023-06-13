@@ -4,6 +4,7 @@ import { Dialog } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { Typography } from "@material-tailwind/react";
 import Navbar from './Navbar';
+import Banner from './Banner';
 
 
 
@@ -60,6 +61,7 @@ export default function Example() {
           </div>
         </div>
       </div>
+      <Banner/>
 
 {/* Society Body Section */}
 

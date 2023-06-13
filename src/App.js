@@ -3,6 +3,12 @@ import './App.css';
 import Navbar from './Navbar';
 import Home from './Home';
 import Hiring from './Hiring';
+import Register from './Register';
+import Fixtures from './Fixtures';
+import Results from './Results';
+import PointsTable from './PointsTable';
+import Login from './Login';
+
 
 import './index.css'
 function App() {
@@ -10,6 +16,11 @@ function App() {
     <div className="App">
       <Home/>
       <Hiring/>
+      <Register/>
+      <Fixtures/>
+      <Results/>
+      <PointsTable/>
+      <Login/>
     </div>
   );
 }
