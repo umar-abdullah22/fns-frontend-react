@@ -26,6 +26,8 @@ const FormComponent = () => {
 
   const [errors, setErrors] = useState({});
 
+  const positions = ['Position 1', 'Position 2', 'Position 3', 'Position 4'];
+
   const handleInputChange = (e) => {
     const { name, value, files } = e.target;
     console.log(e.target);
@@ -87,143 +89,153 @@ const FormComponent = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-md mx-auto">
-      <div className="mb-4">
-        <label
-          className="block text-gray-700 text-sm font-bold mb-2"
-          htmlFor="name"
-        >
-          Name
-        </label>
-        <input
-          type="text"
-          name="userName"
-          value={formData.userName}
-          onChange={handleInputChange}
-          className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
-            errors.userName ? 'border-red-500' : ''
-          }`}
-          required
-        />
-        {errors.userName && (
-          <p className="text-red-500 text-xs italic">{errors.userName}</p>
-        )}
-      </div>
-      <div className="mb-4">
-        <label
-          className="block text-gray-700 text-sm font-bold mb-2"
-          htmlFor="phone"
-        >
-          Phone
-        </label>
-        <input
-          type="text"
-          name="phoneNumber"
-          value={formData.phoneNumber}
-          onChange={handleInputChange}
-          className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
-            errors.phoneNumber ? 'border-red-500' : ''
-          }`}
-          required
-        />
-        {errors.phoneNumber && (
-          <p className="text-red-500 text-xs italic">{errors.phoneNumber}</p>
-        )}
-      </div>
-      <div className="mb-4">
-        <label
-          className="block text-gray-700 text-sm font-bold mb-2"
-          htmlFor="position"
-        >
-          Position
-        </label>
-        <select
-          name="position"
-          value={formData.position}
-          onChange={handleInputChange}
-          className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
-            errors.position ? 'border-red-500' : ''
-          }`}
-          required
-        >
-          <option value="">Select a position</option>
-          {positions.map((position, index) => (
-            <option key={index} value={position}>
-              {position}
+    <div>
+      <div className="mb-8"></div> {/* Section break */}
+      <p className="text-gray-800 text-lg mb-4">
+        Please provide the following information for the hiring process:
+      </p>
+      <form
+        onSubmit={handleSubmit}
+        className="max-w-md mx-auto bg-white p-8 rounded-lg shadow-lg"
+      >
+        <div className="mb-4">
+          <label
+            className="block text-gray-700 text-sm font-bold mb-2"
+            htmlFor="name"
+          >
+            Name
+          </label>
+          <input
+            type="text"
+            name="userName"
+            value={formData.userName}
+            onChange={handleInputChange}
+            className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
+              errors.userName ? 'border-red-500' : ''
+            }`}
+            required
+          />
+          {errors.userName && (
+            <p className="text-red-500 text-xs italic">{errors.userName}</p>
+          )}
+        </div>
+        <div className="mb-4">
+          <label
+            className="block text-gray-700 text-sm font-bold mb-2"
+            htmlFor="phone"
+          >
+            Phone
+          </label>
+          <input
+            type="text"
+            name="phoneNumber"
+            value={formData.phoneNumber}
+            onChange={handleInputChange}
+            className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
+              errors.phoneNumber ? 'border-red-500' : ''
+            }`}
+            required
+          />
+          {errors.phoneNumber && (
+            <p className="text-red-500 text-xs italic">{errors.phoneNumber}</p>
+          )}
+        </div>
+        <div className="mb-4">
+          <label
+            className="block text-gray-700 text-sm font-bold mb-2"
+            htmlFor="position"
+          >
+            Position
+          </label>
+          <select
+            name="position"
+            value={formData.position}
+            onChange={handleInputChange}
+            className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
+              errors.position ? 'border-red-500' : ''
+            }`}
+            required
+          >
+            <option value="" disabled>
+              Select a position
             </option>
-          ))}
-        </select>
-        {errors.position && (
-          <p className="text-red-500 text-xs italic">{errors.position}</p>
-        )}
-      </div>
-      <div className="mb-4">
-        <label
-          className="block text-gray-700 text-sm font-bold mb-2"
-          htmlFor="email"
-        >
-          Email
-        </label>
-        <input
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleInputChange}
-          className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
-            errors.email ? 'border-red-500' : ''
-          }`}
-          required
-        />
-        {errors.email && (
-          <p className="text-red-500 text-xs italic">{errors.email}</p>
-        )}
-      </div>
-      <div className="mb-4">
-        <label
-          className="block text-gray-700 text-sm font-bold mb-2"
-          htmlFor="photo"
-        >
-          Photo
-        </label>
-        <input
-          type="file"
-          name="image"
-          accept="image/*"
-          onChange={handleInputChange}
-          className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
-            errors.image ? 'border-red-500' : ''
-          }`}
-          required
-        />
-        {errors.image && (
-          <p className="text-red-500 text-xs italic">{errors.image}</p>
-        )}
-      </div>
-      <div className="mb-4">
-        <label
-          className="block text-gray-700 text-sm font-bold mb-2"
-          htmlFor="rollNumber"
-        >
-          Roll Number
-        </label>
-        <input
-          type="text"
-          name="rollNumber"
-          value={formData.rollNumber}
-          onChange={handleInputChange}
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-        />
-      </div>
-      <div className="flex items-center justify-center">
-        <button
-          type="submit"
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-        >
-          Submit
-        </button>
-      </div>
-    </form>
+            {positions.map((position, index) => (
+              <option key={index} value={position}>
+                {position}
+              </option>
+            ))}
+          </select>
+          {errors.position && (
+            <p className="text-red-500 text-xs italic">{errors.position}</p>
+          )}
+        </div>
+        <div className="mb-4">
+          <label
+            className="block text-gray-700 text-sm font-bold mb-2"
+            htmlFor="email"
+          >
+            Email
+          </label>
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleInputChange}
+            className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
+              errors.email ? 'border-red-500' : ''
+            }`}
+            required
+          />
+          {errors.email && (
+            <p className="text-red-500 text-xs italic">{errors.email}</p>
+          )}
+        </div>
+        <div className="mb-4">
+          <label
+            className="block text-gray-700 text-sm font-bold mb-2"
+            htmlFor="photo"
+          >
+            Photo
+          </label>
+          <input
+            type="file"
+            name="image"
+            onChange={handleInputChange}
+            className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
+              errors.image ? 'border-red-500' : ''
+            }`}
+            required
+          />
+          {errors.image && (
+            <p className="text-red-500 text-xs italic">{errors.image}</p>
+          )}
+        </div>
+        <div className="mb-4">
+          <label
+            className="block text-gray-700 text-sm font-bold mb-2"
+            htmlFor="rollNumber"
+          >
+            Roll Number
+          </label>
+          <input
+            type="text"
+            name="rollNumber"
+            value={formData.rollNumber}
+            onChange={handleInputChange}
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          />
+        </div>
+        <div className="flex items-center justify-center">
+          <button
+            type="submit"
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          >
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
   );
 };
 
-export default FormComponent;
+export default HiringFormComponent;
