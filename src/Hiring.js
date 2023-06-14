@@ -1,18 +1,7 @@
 import React, { useState } from 'react';
 import { RegisterHiring } from './services/hiringApi';
-
-const positions = [
-  'President',
-  'Vice President',
-  'Cricket Coordinator',
-  'Football Coordinator',
-  'General Secretory',
-  'Table Tennis Coordinator',
-  'Badminton Coordinator',
-  'Dart Coordinator',
-  'Rifle Shooting Coordinator',
-  'Treasurer',
-]; // Example dropdown options
+import Navbar from './Navbar.js';
+// Example dropdown options
 
 const HiringFormComponent = () => {
   const [formData, setFormData] = useState({
@@ -26,8 +15,18 @@ const HiringFormComponent = () => {
 
   const [errors, setErrors] = useState({});
 
-  const positions = ['Position 1', 'Position 2', 'Position 3', 'Position 4'];
-
+  const positions = [
+    'President',
+    'Vice President',
+    'Cricket Coordinator',
+    'Football Coordinator',
+    'General Secretory',
+    'Table Tennis Coordinator',
+    'Badminton Coordinator',
+    'Dart Coordinator',
+    'Rifle Shooting Coordinator',
+    'Treasurer',
+  ]; 
   const handleInputChange = (e) => {
     const { name, value, files } = e.target;
     console.log(e.target);
@@ -89,7 +88,14 @@ const HiringFormComponent = () => {
   };
 
   return (
+    
     <div>
+      <Navbar/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+
       <div className="mb-8"></div> {/* Section break */}
       <p className="text-gray-800 text-lg mb-4">
         Please provide the following information for the hiring process:
