@@ -7,9 +7,10 @@ import { Link } from 'react-router-dom';
 
 const navigation = [
   { name: 'Home', href: '/' },
-  { name: 'Games', href: '#' },
+  { name: 'Fixtures', href: '/fixtures' },
+  { name: 'Results', href: '/results' },
   { name: 'Hiring', href: '/hiring' },
-  { name: 'Register', href: 'team-register' },
+  { name: 'Register', href: '/team-register' },
 ];
 
 export default function Example() {
