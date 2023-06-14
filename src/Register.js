@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import Navbar from './Navbar.js';
 const RegisterTeamComponent = () => {
   const [teamData, setTeamData] = useState({
     captainName: '',
@@ -22,6 +22,11 @@ const RegisterTeamComponent = () => {
 
   return (
     <div>
+<Navbar/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
       <div className="mb-8"></div> {/* Section break */}
       <p className="text-gray-800 text-lg mb-4">
         Please provide the following information to register your team:
