@@ -6,6 +6,7 @@ import Fixtures from './Fixtures';
 import Results from './Results';
 import PointsTable from './PointsTable';
 import Login from './Login';
+import CoordinatorComponent from './Coordinator';
 export default function RouteComponent() {
   //   const { token } = useUser();
   const routes = useRoutes([
@@ -39,6 +40,11 @@ export default function RouteComponent() {
     {
       path: '/team-register',
       element: <Register />,
+    },
+
+    {
+      path: '/coordinator',
+      element: <CoordinatorComponent/>,
     },
   ]);
 

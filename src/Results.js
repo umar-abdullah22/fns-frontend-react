@@ -1,4 +1,5 @@
 import React from 'react';
+import Navbar from './Navbar.js';
 
 const results = [
   {
@@ -41,6 +42,11 @@ const results = [
 const Results = () => {
   return (
     <div className="container mx-auto px-4 py-8">
+<Navbar/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>      
       <h2 className="text-3xl font-bold text-center mb-6">Results</h2>
       <div className="grid gap-6">
         {results.map((result, index) => (
