@@ -4,13 +4,18 @@ import Navbar from './Navbar.js';
 // Example dropdown options
 
 const HiringFormComponent = () => {
+  const user = localStorage.getItem('user');
+  let parsedUser;
+  if (user) {
+    parsedUser = JSON.parse(user);
+  }
   const [formData, setFormData] = useState({
-    userName: '',
+    userName: parsedUser.userName,
     phoneNumber: '',
     position: '',
-    email: '',
+    email: parsedUser.email,
     image: '',
-    rollNumber: '',
+    rollNumber: parsedUser.rollNumber,
   });
 
   const [errors, setErrors] = useState({});
@@ -26,7 +31,7 @@ const HiringFormComponent = () => {
     'Dart Coordinator',
     'Rifle Shooting Coordinator',
     'Treasurer',
-  ]; 
+  ];
   const handleInputChange = (e) => {
     const { name, value, files } = e.target;
     console.log(e.target);
@@ -88,14 +93,12 @@ const HiringFormComponent = () => {
   };
 
   return (
-    
     <div>
-      <Navbar/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-
+      <Navbar />
+      <br />
+      <br />
+      <br />
+      <br />
       <div className="mb-8"></div> {/* Section break */}
       <h2 className="text-3xl font-bold text-center mb-6">Hiring</h2>
       {/* <p className="text-gray-800 text-lg mb-4">
@@ -117,6 +120,7 @@ const HiringFormComponent = () => {
             name="userName"
             value={formData.userName}
             onChange={handleInputChange}
+            disabled
             className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
               errors.userName ? 'border-red-500' : ''
             }`}
@@ -188,6 +192,7 @@ const HiringFormComponent = () => {
             name="email"
             value={formData.email}
             onChange={handleInputChange}
+            disabled
             className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
               errors.email ? 'border-red-500' : ''
             }`}
@@ -228,6 +233,7 @@ const HiringFormComponent = () => {
             type="text"
             name="rollNumber"
             value={formData.rollNumber}
+            disabled
             onChange={handleInputChange}
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
