@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from './Navbar.js';
-import { getSubmissions } from './services/hiringApi.js';
+import { changeStatus, getSubmissions } from './services/hiringApi.js';
 import { getTeamsRegs } from './services/teamsApi.js';
-import { getSubmissions } from './services/hiringApi.js';
-import { getTeamsRegs } from './services/teamsApi.js';
+import { getUsers } from './services/userApi.js';
 
 const AdminPanel = () => {
   // Hiring Form Data
@@ -27,6 +26,7 @@ const AdminPanel = () => {
   });
   const [submissions, setSubmissions] = useState([]);
   const [teamsReg, setTeamsReg] = useState([]);
+  const [users, setUsers] = useState([]);
   const getSubmissionsApi = async () => {
     const data = await getSubmissions();
     setSubmissions(data);
@@ -37,9 +37,15 @@ const AdminPanel = () => {
     setTeamsReg(data);
   };
 
+  const getAllUsers = async () => {
+    const data = await getUsers();
+    setUsers(data);
+  };
+
   useEffect(() => {
     getSubmissionsApi();
     getTeamsRegApi();
+    getAllUsers();
   }, []);
   // Function to handle hiring form submissions
   const handleHiringFormSubmit = (e) => {
@@ -75,18 +81,28 @@ const AdminPanel = () => {
   const handleApproveHiringForm = (index) => {
     // Implement the logic to approve the hiring form at the specified index
     // For example:
-    const updatedFormData = [...hiringFormData];
-    updatedFormData[index].approved = true;
-    setHiringFormData(updatedFormData);
+    // const updatedFormData = [...hiringFormData];
+    // updatedFormData[index].approved = true;
+    // setHiringFormData(updatedFormData);
+    const payload = {
+      userId: index,
+      status: 'APPROVED',
+    };
+    changeStatus(payload);
   };
 
   // Function to handle rejection of a hiring form
   const handleRejectHiringForm = (index) => {
     // Implement the logic to reject the hiring form at the specified index
-    // For example:
-    const updatedFormData = [...hiringFormData];
-    updatedFormData[index].approved = false;
-    setHiringFormData(updatedFormData);
+    // // For example:
+    // const updatedFormData = [...hiringFormData];
+    // updatedFormData[index].approved = false;
+    // setHiringFormData(updatedFormData);
+    const payload = {
+      userId: index,
+      status: 'REJECTED',
+    };
+    changeStatus(payload);
   };
 
   // Function to handle approval of a team registration
@@ -132,8 +148,6 @@ const AdminPanel = () => {
               <th className="py-2">Status</th>
               <th className="py-2">Photo</th>
               <th className="py-2">Actions</th>
-              <th className="py-2">Status</th>
-              <th className="py-2">Photo</th>
             </tr>
           </thead>
           <tbody>
@@ -150,26 +164,17 @@ const AdminPanel = () => {
                 </td>
                 <td className="border-t py-2">
                   <button
-                    onClick={() => handleApproveHiringForm(index)}
+                    onClick={() => handleApproveHiringForm(data?.id)}
                     className="bg-green-500 hover:bg-green-600 text-white font-bold py-1 px-2 rounded mr-1"
                   >
                     Approve
                   </button>
                   <button
-                    onClick={() => handleRejectHiringForm(index)}
+                    onClick={() => handleRejectHiringForm(data?.id)}
                     className="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-2 rounded"
                   >
                     Reject
                   </button>
-                </td>
-                <td className="border-t py-2">{data?.userName}</td>
-                <td className="border-t py-2">{data?.phoneNumber}</td>
-                <td className="border-t py-2">{data?.position}</td>
-                <td className="border-t py-2">{data?.email}</td>
-                <td className="border-t py-2">{data?.rollNumber}</td>
-                <td className="border-t py-2">{data?.status}</td>
-                <td className="border-t py-2">
-                  <img src={data?.photos}></img>
                 </td>
               </tr>
             ))}
@@ -214,6 +219,47 @@ const AdminPanel = () => {
                 <td className="border-t py-2">{data?.captainName}</td>
                 <td className="border-t py-2">{data?.phoneNumber}</td>
                 {/* <td className="border-t py-2">{data?.members.join(', ')}</td> */}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <div className="max-w-4xl mx-auto bg-white p-8 mt-8 rounded-lg shadow-lg">
+        <h3 className="text-xl font-bold mb-4">Platform Users</h3>
+        <table className="min-w-full">
+          <thead>
+            <tr>
+              <th className="py-2">User Name</th>
+              <th className="py-2">Email</th>
+              <th className="py-2">Roll Number</th>
+              <th className="py-2">Status</th>
+              <th className="py-2">Role</th>
+              <th className="py-2">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {users?.map((data, index) => (
+              <tr key={index}>
+                <td className="border-t py-2">{data?.userName}</td>
+                <td className="border-t py-2">{data?.email}</td>
+                <td className="border-t py-2">{data?.rollNumber}</td>
+                <td className="border-t py-2">{data?.status}</td>
+                <td className="border-t py-2">{data?.role}</td>
+                <td className="border-t py-2">
+                  <button
+                    onClick={() => handleApproveHiringForm(data?.id)}
+                    className="bg-green-500 hover:bg-green-600 text-white font-bold py-1 px-2 rounded mr-1"
+                  >
+                    Approve
+                  </button>
+                  <button
+                    onClick={() => handleRejectHiringForm(data?.id)}
+                    className="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-2 rounded"
+                  >
+                    Reject
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>

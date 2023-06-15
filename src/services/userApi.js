@@ -38,3 +38,18 @@ export const updateStatus = async (payload) => {
     });
   }
 };
+
+export const getUsers = async () => {
+  try {
+    const result = await axios.get(`http://localhost:3300/api/user`);
+    console.log(result);
+    if (result.data) {
+      return result.data;
+    }
+  } catch (error) {
+    console.log(error);
+    toast.error(error?.response?.data?.message, {
+      position: toast.POSITION.TOP_RIGHT,
+    });
+  }
+};
