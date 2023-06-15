@@ -45,20 +45,19 @@ export default function RouteComponent() {
     },
 
     {
-      path: '/coordinator',
-      element: <CoordinatorComponent/>,
+      path: '/coordinator-dashboard',
+      element: <CoordinatorComponent />,
     },
 
     {
-      path: '/Admin',
-      element: <AdminPanel/>,
+      path: '/admin-dashboard',
+      element: <AdminPanel />,
     },
-    
+
     {
       path: '/signup',
-      element: <SignupForm/>,
+      element: <SignupForm />,
     },
-
   ]);
 
   return routes;

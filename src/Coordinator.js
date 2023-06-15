@@ -4,14 +4,17 @@ import TimePicker from 'react-time-picker';
 import 'react-datepicker/dist/react-datepicker.css';
 import 'react-time-picker/dist/TimePicker.css';
 import Navbar from './Navbar';
+import { getTeamsRegs } from './services/teamsApi';
 
 const CoordinatorComponent = () => {
+  const [teams, setTeams] = useState();
   const [fixtureData, setFixtureData] = useState({
     teamA: '',
     teamB: '',
     date: new Date(),
     time: '',
-    venue: '',
+    Venue: '',
+    sports: '',
   });
 
   const [resultData, setResultData] = useState({
@@ -19,7 +22,7 @@ const CoordinatorComponent = () => {
     teamB: '',
     date: new Date(),
     time: '',
-    venue: '',
+    Venue: '',
     winner: '',
   });
 
@@ -60,25 +63,40 @@ const CoordinatorComponent = () => {
   };
 
   const handleViewRegistrations = () => {
+    getTeams();
     // Handle viewing team registrations logic here
+
     console.log('Viewing team registrations');
+  };
+
+  const getTeams = async () => {
+    const data = await getTeamsRegs();
+    setTeams(data);
   };
 
   return (
     <div>
-      <Navbar />
+      <Navbar
+        loggedIn={
+          JSON.parse(localStorage.getItem('user'))?.role === 'COORDINATOR'
+        }
+      />
       <br />
       <br />
       <br />
       <br />
       <div className="mb-8"></div> {/* Section break */}
-      <h2 className="text-3xl font-bold text-center mb-6">Coordinator Dashboard</h2>
-
+      <h2 className="text-3xl font-bold text-center mb-6">
+        Coordinator Dashboard
+      </h2>
       <div className="max-w-md mx-auto bg-white p-8 rounded-lg shadow-lg">
         <h3 className="text-xl font-bold mb-4">Add Fixture</h3>
         <form onSubmit={handleAddFixture}>
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="teamA">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="teamA"
+            >
               Team A
             </label>
             <input
@@ -91,7 +109,10 @@ const CoordinatorComponent = () => {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="teamB">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="teamB"
+            >
               Team B
             </label>
             <input
@@ -104,7 +125,10 @@ const CoordinatorComponent = () => {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="date">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="date"
+            >
               Date
             </label>
             <DatePicker
@@ -115,7 +139,10 @@ const CoordinatorComponent = () => {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="time">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="time"
+            >
               Time
             </label>
             <TimePicker
@@ -126,13 +153,16 @@ const CoordinatorComponent = () => {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="venue">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="venue"
+            >
               Venue
             </label>
             <input
               type="text"
               name="venue"
-              value={fixtureData.venue}
+              value={fixtureData.Venue}
               onChange={handleFixtureInputChange}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               required
@@ -148,12 +178,14 @@ const CoordinatorComponent = () => {
           </div>
         </form>
       </div>
-
       <div className="max-w-md mx-auto bg-white p-8 mt-8 rounded-lg shadow-lg">
         <h3 className="text-xl font-bold mb-4">Add Result</h3>
         <form onSubmit={handleAddResult}>
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="teamA">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="teamA"
+            >
               Team A
             </label>
             <input
@@ -166,7 +198,10 @@ const CoordinatorComponent = () => {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="teamB">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="teamB"
+            >
               Team B
             </label>
             <input
@@ -179,7 +214,10 @@ const CoordinatorComponent = () => {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="date">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="date"
+            >
               Date
             </label>
             <DatePicker
@@ -190,7 +228,10 @@ const CoordinatorComponent = () => {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="time">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="time"
+            >
               Time
             </label>
             <TimePicker
@@ -201,20 +242,26 @@ const CoordinatorComponent = () => {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="venue">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="venue"
+            >
               Venue
             </label>
             <input
               type="text"
               name="venue"
-              value={resultData.venue}
+              value={resultData.Venue}
               onChange={handleResultInputChange}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               required
             />
           </div>
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="winner">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="winner"
+            >
               Winner
             </label>
             <input
@@ -236,7 +283,6 @@ const CoordinatorComponent = () => {
           </div>
         </form>
       </div>
-
       <div className="max-w-md mx-auto bg-white p-8 mt-8 rounded-lg shadow-lg">
         <h3 className="text-xl font-bold mb-4">Team Registrations</h3>
         <button
