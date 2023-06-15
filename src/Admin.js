@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from './Navbar.js';
+import { getSubmissions } from './services/hiringApi.js';
+import { getTeamsRegs } from './services/teamsApi.js';
 
 const AdminPanel = () => {
   // Hiring Form Data
@@ -21,7 +23,22 @@ const AdminPanel = () => {
     captainPhone: '',
     players: ['', '', '', '', ''],
   });
+  const [submissions, setSubmissions] = useState([]);
+  const [teamsReg, setTeamsReg] = useState([]);
+  const getSubmissionsApi = async () => {
+    const data = await getSubmissions();
+    setSubmissions(data);
+  };
 
+  const getTeamsRegApi = async () => {
+    const data = await getTeamsRegs();
+    setTeamsReg(data);
+  };
+
+  useEffect(() => {
+    getSubmissionsApi();
+    getTeamsRegApi();
+  }, []);
   // Function to handle hiring form submissions
   const handleHiringFormSubmit = (e) => {
     e.preventDefault();
@@ -93,7 +110,9 @@ const AdminPanel = () => {
       <br />
       <br />
       <br />
-      <Navbar />
+      <Navbar
+        loggedIn={JSON.parse(localStorage.getItem('user'))?.role === 'ADMIN'}
+      />
       <div className="mt-8">
         <h2 className="text-3xl font-bold text-center mb-6">Admin Panel</h2>
       </div>
@@ -109,10 +128,12 @@ const AdminPanel = () => {
               <th className="py-2">Email</th>
               <th className="py-2">Roll Number</th>
               <th className="py-2">Actions</th>
+              <th className="py-2">Status</th>
+              <th className="py-2">Photo</th>
             </tr>
           </thead>
           <tbody>
-            {hiringFormData.map((data, index) => (
+            {submissions?.map((data, index) => (
               <tr key={index}>
                 <td className="border-t py-2">{data.userName}</td>
                 <td className="border-t py-2">{data.phoneNumber}</td>
@@ -131,7 +152,15 @@ const AdminPanel = () => {
                     className="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-2 rounded"
                   >
                     Reject
-                  </button>
+                  </button></td>
+                <td className="border-t py-2">{data?.userName}</td>
+                <td className="border-t py-2">{data?.phoneNumber}</td>
+                <td className="border-t py-2">{data?.position}</td>
+                <td className="border-t py-2">{data?.email}</td>
+                <td className="border-t py-2">{data?.rollNumber}</td>
+                <td className="border-t py-2">{data?.status}</td>
+                <td className="border-t py-2">
+                  <img src={data?.photos}></img>
                 </td>
               </tr>
             ))}
@@ -152,7 +181,7 @@ const AdminPanel = () => {
             </tr>
           </thead>
           <tbody>
-            {teamRegistrationData.map((data, index) => (
+            {teamsReg?.map((data, index) => (
               <tr key={index}>
                 <td className="border-t py-2">{data.teamName}</td>
                 <td className="border-t py-2">{data.captainName}</td>
@@ -172,6 +201,10 @@ const AdminPanel = () => {
                     Reject
                   </button>
                 </td>
+                <td className="border-t py-2">{data?.teamName}</td>
+                <td className="border-t py-2">{data?.captainName}</td>
+                <td className="border-t py-2">{data?.phoneNumber}</td>
+                {/* <td className="border-t py-2">{data?.members.join(', ')}</td> */}
               </tr>
             ))}
           </tbody>

@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from './Navbar.js';
+import { getFixtures } from './services/fixturesapi.js';
 const fixtures = [
   {
     teamA: 'Team A',
@@ -34,20 +35,25 @@ const fixtures = [
 ];
 
 const Fixtures = () => {
+  const [fixturess, setFixtures] = useState([]);
+  const getFixtruesApi = async () => {
+    const data = await getFixtures();
+    setFixtures(data);
+  };
+  useEffect(() => {
+    getFixtruesApi();
+  }, []);
   return (
     <div className="container mx-auto px-4 py-8">
-      <Navbar/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
+      <Navbar />
+      <br />
+      <br />
+      <br />
+      <br />
       <h2 className="text-3xl font-bold text-center mb-6">Fixtures</h2>
       <div className="grid gap-6">
-        {fixtures.map((fixture, index) => (
-          <div
-            key={index}
-            className="bg-white rounded-lg shadow-md p-6 mb-6"
-          >
+        {fixturess?.map((fixture, index) => (
+          <div key={index} className="bg-white rounded-lg shadow-md p-6 mb-6">
             <div>
               <h3 className="text-lg font-bold text-gray-800 mb-2">
                 {fixture.teamA} vs {fixture.teamB}

@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from './Navbar.js';
+import { getResults } from './services/resultsApi.js';
 
 const results = [
   {
@@ -40,20 +41,25 @@ const results = [
 ];
 
 const Results = () => {
+  const [resultss, setResults] = useState([]);
+  const getResultsApi = async () => {
+    const data = await getResults();
+    setResults(data);
+  };
+  useEffect(() => {
+    getResultsApi();
+  }, []);
   return (
     <div className="container mx-auto px-4 py-8">
-<Navbar/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>      
+      <Navbar />
+      <br />
+      <br />
+      <br />
+      <br />
       <h2 className="text-3xl font-bold text-center mb-6">Results</h2>
       <div className="grid gap-6">
-        {results.map((result, index) => (
-          <div
-            key={index}
-            className="bg-white rounded-lg shadow-md p-6 mb-6"
-          >
+        {resultss?.map((result, index) => (
+          <div key={index} className="bg-white rounded-lg shadow-md p-6 mb-6">
             <div>
               <h3 className="text-lg font-bold text-gray-800 mb-2">
                 {result.teamA} vs {result.teamB}
