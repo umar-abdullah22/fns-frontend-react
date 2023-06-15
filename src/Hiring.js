@@ -97,9 +97,10 @@ const HiringFormComponent = () => {
       <br/>
 
       <div className="mb-8"></div> {/* Section break */}
-      <p className="text-gray-800 text-lg mb-4">
+      <h2 className="text-3xl font-bold text-center mb-6">Hiring</h2>
+      {/* <p className="text-gray-800 text-lg mb-4">
         Please provide the following information for the hiring process:
-      </p>
+      </p> */}
       <form
         onSubmit={handleSubmit}
         className="max-w-md mx-auto bg-white p-8 rounded-lg shadow-lg"

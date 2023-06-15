@@ -6,6 +6,9 @@ import Fixtures from './Fixtures';
 import Results from './Results';
 import PointsTable from './PointsTable';
 import Login from './Login';
+import CoordinatorComponent from './Coordinator';
+import AdminPanel from './Admin';
+import SignupForm from './Signup';
 export default function RouteComponent() {
   //   const { token } = useUser();
   const routes = useRoutes([
@@ -40,6 +43,22 @@ export default function RouteComponent() {
       path: '/team-register',
       element: <Register />,
     },
+
+    {
+      path: '/coordinator',
+      element: <CoordinatorComponent/>,
+    },
+
+    {
+      path: '/Admin',
+      element: <AdminPanel/>,
+    },
+    
+    {
+      path: '/signup',
+      element: <SignupForm/>,
+    },
+
   ]);
 
   return routes;
